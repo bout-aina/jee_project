@@ -1,0 +1,71 @@
+<!--/* Thymeleaf templating engine, Each token will be replaced by their respective titles in the resulting page. */-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.utraq.net.nz/thymeleaf/layout"
+      Layout:decorate="template1">
+<head>
+    <title>Ajouter</title>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <h1>Form consultation</h1>
+    <ol class="breadcrumb">
+        <li><a href="@{/user/indexConsultation}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Nouveau Consultation</li>
+    </ol>
+</div>
+<div layout:fragment="content1">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp;</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" th:object="${consultation}" th:action="@{/admin/saveConsultation}" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Date de consultation</label>
+                            <input class="form-control" type="date" name="dateConsultation" th:value="${consultation.dateConsultation}">
+                            <label class="control-label error-label" th:errors="${consultation.dateConsultation}">
+                                Saisir votre date de consultation
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Rapport</label>
+                            <input id="nom" class="form-control" type="text" name="rapport" th:value="${consultation.rapport}">
+                            <label class="control-label error-label" th:errors="${consultation.rapport}">
+                                Saisir votre Rapport
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rendez vous Disponnible</label>
+                            <select th:field="*{rendezVous}" class="form-control">
+                                <option th:each="rdv : ${rendezVousList}"
+                                        th:text="${rdv.toString()}"
+                                        th:value="${rdv.getId()}"
+
+                                />
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <a th:href="@{/user/indexConsultation}" class="btn btn-default" role="button" title="Back list">
+                                <span aria-hidden="true"></span>Liste Consultations
+                            </a>
+                            <button type="submit" class="box-title btn btn-primary" title="Save Data">Save</button>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

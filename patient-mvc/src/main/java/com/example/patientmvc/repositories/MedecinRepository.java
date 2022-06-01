@@ -1,0 +1,13 @@
+package com.example.patientmvc.repositories;
+
+
+import com.example.patientmvc.entities.Medecin;
+import com.example.patientmvc.entities.Patient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MedecinRepository extends JpaRepository<Medecin,Long> {
+    Page<Medecin> findByNomContains(String kw, Pageable pageable);
+
+}
